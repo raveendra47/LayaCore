@@ -3,7 +3,7 @@ use std::fs;
 use std::path::{Path, PathBuf};
 
 /// Pure-Rust Windows `.ico` -> `.res` compiler for embedding `assets/layacore.ico`
-/// directly into `layacore.exe` with zero external build dependencies.
+/// directly into `layacore_cli.exe` with zero external build dependencies.
 fn main() {
     let icon_path = Path::new("assets/layacore.ico");
     println!("cargo:rerun-if-changed={}", icon_path.display());

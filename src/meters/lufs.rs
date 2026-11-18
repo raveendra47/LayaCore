@@ -65,6 +65,7 @@ pub struct LufsMeter {
     ring_buf: Vec<Vec<f64>>,
     ring_idx: usize,
     samples_since_step: usize,
+    total_frames_processed: usize,
 
     // Collected 400ms block energies for integrated LUFS
     block_energies: Vec<f64>,
@@ -80,30 +81,29 @@ impl LufsMeter {
     pub fn new(channels: usize, sample_rate: u32) -> Self {
         let fs = sample_rate as f64;
 
-        // BS.1770-4 Stage 1: Pre-filter high-shelf
-        // f0 = 1681.974450955533 Hz, Gain = 3.999843853973347 dB, Q = 0.7071752369554193
+        // BS.1770-4 Stage 1: Pre-filter high-shelf (exact bilinear transform matching BS.1770-4 @ 48 kHz)
         let f0_shelf = 1681.974450955533;
         let gain_db = 3.999843853973347;
-        let _q_shelf = 0.7071752369554193;
+        let q_shelf = 0.7071752369554196;
 
-        let v0 = 10.0f64.powf(gain_db / 20.0);
+        let vh = 10.0f64.powf(gain_db / 20.0);
+        let vb = vh.powf(0.4996667741545416);
         let k_shelf = (PI * f0_shelf / fs).tan();
-        let alpha_shelf = 1.0 + (2.0 * v0).sqrt() * k_shelf + v0 * k_shelf * k_shelf;
-        let b0_shelf = (v0 + (2.0 * v0).sqrt() * k_shelf + k_shelf * k_shelf) / alpha_shelf;
-        let b1_shelf = 2.0 * (k_shelf * k_shelf - v0) / alpha_shelf;
-        let b2_shelf = (v0 - (2.0 * v0).sqrt() * k_shelf + k_shelf * k_shelf) / alpha_shelf;
-        let a1_shelf = 2.0 * (k_shelf * k_shelf - 1.0) / alpha_shelf;
-        let a2_shelf = (1.0 - 2.0f64.sqrt() * k_shelf + k_shelf * k_shelf) / alpha_shelf;
+        let a0_shelf = 1.0 + k_shelf / q_shelf + k_shelf * k_shelf;
+        let b0_shelf = (vh + vb * k_shelf / q_shelf + k_shelf * k_shelf) / a0_shelf;
+        let b1_shelf = 2.0 * (k_shelf * k_shelf - vh) / a0_shelf;
+        let b2_shelf = (vh - vb * k_shelf / q_shelf + k_shelf * k_shelf) / a0_shelf;
+        let a1_shelf = 2.0 * (k_shelf * k_shelf - 1.0) / a0_shelf;
+        let a2_shelf = (1.0 - k_shelf / q_shelf + k_shelf * k_shelf) / a0_shelf;
 
         // BS.1770-4 Stage 2: RLB filter high-pass
-        // f0 = 38.13547087602444 Hz, Q = 0.5003270373237373
         let f0_rlb = 38.13547087602444;
-        let q_rlb = 0.5003270373237373;
+        let q_rlb = 0.5003270373238773;
         let k_rlb = (PI * f0_rlb / fs).tan();
         let alpha_rlb = 1.0 + k_rlb / q_rlb + k_rlb * k_rlb;
-        let b0_rlb = 1.0 / alpha_rlb;
-        let b1_rlb = -2.0 / alpha_rlb;
-        let b2_rlb = 1.0 / alpha_rlb;
+        let b0_rlb = 1.0;
+        let b1_rlb = -2.0;
+        let b2_rlb = 1.0;
         let a1_rlb = 2.0 * (k_rlb * k_rlb - 1.0) / alpha_rlb;
         let a2_rlb = (1.0 - k_rlb / q_rlb + k_rlb * k_rlb) / alpha_rlb;
 
@@ -135,6 +135,7 @@ impl LufsMeter {
             ring_buf,
             ring_idx: 0,
             samples_since_step: 0,
+            total_frames_processed: 0,
             block_energies: Vec::new(),
             momentary_max: -144.0,
             short_term_blocks_count: 30, // 30 steps of 100ms = 3.0s
@@ -163,9 +164,15 @@ impl LufsMeter {
 
             self.ring_idx = (self.ring_idx + 1) % self.block_size_samples;
             self.samples_since_step += 1;
+            self.total_frames_processed += 1;
 
             if self.samples_since_step >= self.step_size_samples {
                 self.samples_since_step = 0;
+
+                // Per ITU-R BS.1770-4, do not emit partial 400ms gating blocks before the ring buffer fills.
+                if self.total_frames_processed < self.block_size_samples {
+                    continue;
+                }
 
                 // Compute block energy for 400ms window
                 let mut total_block_energy = 0.0f64;

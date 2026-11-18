@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 430" width="820" height="430" role="img" aria-label="LayaCore Single-Pass Signal Pipeline">
+  <defs>
+    <linearGradient id="coreGradDark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2a161b"/>
+      <stop offset="100%" stop-color="#1c1418"/>
+    </linearGradient>
+    <linearGradient id="outGradDark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#16222c"/>
+      <stop offset="100%" stop-color="#131922"/>
+    </linearGradient>
+    <marker id="arrowDark" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8.5 5 L 0 8.5 z" fill="#8b949e"/>
+    </marker>
+    <marker id="arrowAccentDark" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8.5 5 L 0 8.5 z" fill="#f85149"/>
+    </marker>
+    <style>
+      .font { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+      .title { font-size: 14px; font-weight: 700; fill: #f0f6fc; }
+      .sub { font-size: 11.5px; font-weight: 400; fill: #8b949e; }
+      .group-label { font-size: 11px; font-weight: 700; letter-spacing: 0.7px; text-transform: uppercase; fill: #c9d1d9; }
+    </style>
+  </defs>
+
+  <!-- Top Core Decoder Card -->
+  <rect x="160" y="12" width="500" height="66" rx="12" fill="url(#coreGradDark)" stroke="#f85149" stroke-width="1.6"/>
+  <text x="410" y="38" text-anchor="middle" class="font title">LayaCore Core — Pure-Rust Decoder</text>
+  <text x="410" y="58" text-anchor="middle" class="font sub">Single-Pass PCM Streaming  •  Symphonia  •  rusty-opus  •  Sun AU</text>
+
+  <!-- Branch Arrows from Core to Left & Right Group Containers -->
+  <path d="M 310 78 C 310 95, 215 89, 215 106" fill="none" stroke="#f85149" stroke-width="1.6" marker-end="url(#arrowAccentDark)"/>
+  <path d="M 510 78 C 510 95, 605 89, 605 106" fill="none" stroke="#f85149" stroke-width="1.6" marker-end="url(#arrowAccentDark)"/>
+
+  <!-- Left Group: Broadcast & Dynamics Path -->
+  <rect x="30" y="110" width="370" height="210" rx="14" fill="#161b22" fill-opacity="0.78" stroke="#30363d" stroke-width="1.3" stroke-dasharray="5 4"/>
+  <text x="215" y="131" text-anchor="middle" class="font group-label">Broadcast &amp; Dynamics Path</text>
+
+  <!-- Node L1 -->
+  <rect x="50" y="143" width="330" height="64" rx="10" fill="#1c2128" stroke="#388bfd" stroke-width="1.4"/>
+  <text x="215" y="169" text-anchor="middle" class="font title">ITU-R BS.1770-4 / EBU R128</text>
+  <text x="215" y="189" text-anchor="middle" class="font sub">Integrated LUFS, Short-Term, Momentary &amp; LRA</text>
+
+  <!-- Arrow L1 -> L2 -->
+  <line x1="215" y1="207" x2="215" y2="236" stroke="#8b949e" stroke-width="1.5" marker-end="url(#arrowDark)"/>
+
+  <!-- Node L2 -->
+  <rect x="50" y="242" width="330" height="64" rx="10" fill="#1c2128" stroke="#388bfd" stroke-width="1.4"/>
+  <text x="215" y="268" text-anchor="middle" class="font title">4× True Peak &amp; Stereo Field</text>
+  <text x="215" y="288" text-anchor="middle" class="font sub">dBTP Headroom, Clipping, Crest Factor &amp; Phase</text>
+
+  <!-- Right Group: Spectral & Forensics Path -->
+  <rect x="420" y="110" width="370" height="210" rx="14" fill="#161b22" fill-opacity="0.78" stroke="#30363d" stroke-width="1.3" stroke-dasharray="5 4"/>
+  <text x="605" y="131" text-anchor="middle" class="font group-label">Spectral &amp; Forensics Path</text>
+
+  <!-- Node R1 -->
+  <rect x="440" y="143" width="330" height="64" rx="10" fill="#1c2128" stroke="#d29922" stroke-width="1.4"/>
+  <text x="605" y="169" text-anchor="middle" class="font title">31-Band ISO FFT &amp; MIR</text>
+  <text x="605" y="189" text-anchor="middle" class="font sub">Spectrum, Centroid, Rolloff, BPM &amp; Musical Key</text>
+
+  <!-- Arrow R1 -> R2 -->
+  <line x1="605" y1="207" x2="605" y2="236" stroke="#8b949e" stroke-width="1.5" marker-end="url(#arrowDark)"/>
+
+  <!-- Node R2 -->
+  <rect x="440" y="242" width="330" height="64" rx="10" fill="#1c2128" stroke="#d29922" stroke-width="1.4"/>
+  <text x="605" y="268" text-anchor="middle" class="font title">Fake Lossless Detector</text>
+  <text x="605" y="288" text-anchor="middle" class="font sub">High-Frequency Brickwall &amp; Transcode Audit</text>
+
+  <!-- Merge Arrows to Bottom Output Card -->
+  <path d="M 215 320 C 215 338, 310 332, 310 349" fill="none" stroke="#8b949e" stroke-width="1.6" marker-end="url(#arrowDark)"/>
+  <path d="M 605 320 C 605 338, 510 332, 510 349" fill="none" stroke="#8b949e" stroke-width="1.6" marker-end="url(#arrowDark)"/>
+
+  <!-- Bottom Unified Report Card -->
+  <rect x="130" y="353" width="560" height="64" rx="12" fill="url(#outGradDark)" stroke="#3fb950" stroke-width="1.6"/>
+  <text x="410" y="379" text-anchor="middle" class="font title">Unified Mastering Report &amp; Batch Aggregator</text>
+  <text x="410" y="399" text-anchor="middle" class="font sub">0–100 Advisor Score  •  Interactive TUI  •  PNG/SVG Dashboard  •  JSON / CSV</text>
+</svg>

@@ -15,7 +15,7 @@ use layacore::{
 
 #[derive(Parser, Debug)]
 #[command(
-    name = "layacore",
+    name = "layacore_cli",
     author = "LayaCore",
     version = "0.1.0",
     about = "LayaCore — Pure Rust offline audio mastering, loudness (ITU-R BS.1770 / EBU R128), fake lossless transcode verification & batch album scanner"

@@ -75,9 +75,9 @@ fn test_advisor_detects_clipping_and_phase_cancellation() {
         "Expected Critical STEREO phase advice"
     );
 
-    // 2. Clean headroom, in-phase file -> high score & clean headroom advice
+    // 2. Clean headroom, streaming-optimal loudness (-14.6 LUFS), in-phase file -> high score
     let clean_wav = dir.join("clean_mix.wav");
-    create_wav(&clean_wav, 440.0, 0.35, false, 1.0).unwrap();
+    create_wav(&clean_wav, 440.0, 0.20, false, 1.0).unwrap();
 
     let clean = analyze_file_simple(&clean_wav, &AnalysisOptions::default()).unwrap();
     assert!(

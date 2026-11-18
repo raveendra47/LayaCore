@@ -1,4 +1,5 @@
 pub mod au;
+pub mod opus;
 pub mod symphonia;
 
 use std::path::Path;
@@ -54,6 +55,23 @@ pub fn open_audio_file(path: &Path) -> Result<Box<dyn AudioDecoder>, AnalyzerErr
         .map(|s| s.to_lowercase())
         .unwrap_or_default();
 
+    // Gracefully report informative errors for known unsupported formats
+    let unsupported_label = match extension.as_str() {
+        "wma" => Some("Windows Media Audio (.wma)"),
+        "ac3" | "eac3" => Some("Dolby Digital (.ac3 / .eac3)"),
+        "dsf" | "dff" => Some("Direct Stream Digital / DSD (.dsf / .dff)"),
+        "ra" | "rm" => Some("RealAudio (.ra / .rm)"),
+        "wv" => Some("WavPack (.wv)"),
+        "ape" => Some("Monkey's Audio (.ape)"),
+        _ => None,
+    };
+    if let Some(label) = unsupported_label {
+        return Err(AnalyzerError::UnsupportedFormat(format!(
+            "{} is not currently supported by LayaCore. Supported formats: FLAC, WAV, MP3, M4A/AAC, ALAC, OGG Vorbis, Ogg Opus (.opus), AIFF, CAF, AU/SND.",
+            label
+        )));
+    }
+
     // Check if it's Sun AU / SND format
     if extension == "au" || extension == "snd" {
         match au::AuDecoder::open(path) {
@@ -65,7 +83,6 @@ pub fn open_audio_file(path: &Path) -> Result<Box<dyn AudioDecoder>, AnalyzerErr
         }
     }
 
-    // Default to Symphonia universal decoder
-    let decoder = symphonia::SymphoniaDecoder::open(path)?;
-    Ok(Box::new(decoder))
+    // Symphonia universal demuxer + decoder (with pure-Rust Opus delegation for Ogg Opus)
+    symphonia::open_symphonia_or_opus(path)
 }

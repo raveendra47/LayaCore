@@ -19,7 +19,7 @@ env:
 
 jobs:
   release:
-    name: Build & Publish layacore.exe (Windows)
+    name: Build & Publish layacore_cli.exe (Windows)
     runs-on: windows-latest
 
     steps:
@@ -42,16 +42,16 @@ jobs:
         shell: pwsh
         run: |
           New-Item -ItemType Directory -Force -Path dist | Out-Null
-          Copy-Item target/release/layacore.exe dist/layacore.exe
+          Copy-Item target/release/layacore_cli.exe dist/layacore_cli.exe
           Copy-Item README.md dist/README.md
           Copy-Item LICENSE dist/LICENSE
           Compress-Archive -Path dist/* -DestinationPath LayaCore-windows-x86_64.zip -Force
 
-      - name: Create GitHub Release & attach layacore.exe
+      - name: Create GitHub Release & attach layacore_cli.exe
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ github.event_name == 'workflow_dispatch' && inputs.tag || github.ref_name }}
           generate_release_notes: true
           files: |
-            target/release/layacore.exe
+            target/release/layacore_cli.exe
             LayaCore-windows-x86_64.zip
