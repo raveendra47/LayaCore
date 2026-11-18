@@ -225,20 +225,36 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ## 🏗 Architecture
 
+LayaCore is structured as a modular, zero-FFI Rust library (`layacore`) wrapped by a Windows CLI & interactive TUI binary (`layacore_cli.exe`), compiled with a pure-Rust PE icon resource linker (`build.rs`) *(click diagram to open interactive zoom)*:
+
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/architecture-dark.svg" />
+    <source media="(prefers-color-scheme: light)" srcset="assets/architecture-light.svg" />
+    <img src="assets/architecture-dark.svg" alt="LayaCore Software Architecture and Module Map" width="840" />
+  </picture>
+</p>
+
+<details>
+<summary><strong>View Source Tree Breakdown</strong></summary>
+
 ```text
+build.rs                # Pure-Rust Windows .ico -> .res compiler (embeds layacore.ico into layacore_cli.exe)
 src/
 ├── lib.rs              # Single-pass streaming analysis pipeline & public library API
-├── main.rs             # CLI interface (clap) & progress bars
-├── menu.rs             # Interactive TUI launcher with keyboard navigation
-├── batch.rs            # Multi-core parallel folder/album scanner & aggregator
-├── advisor.rs          # Automated mastering & mixing advisor + readiness scoring
-├── error.rs            # Typed error handling
+├── main.rs             # CLI interface (clap), directory auto-detection & progress bars
+├── menu.rs             # Interactive TUI launcher with arrow-key navigation & drag-and-drop support
+├── batch.rs            # Multi-core parallel folder/album scanner & library aggregator
+├── advisor.rs          # Automated mastering & mixing advisor + 0–100 readiness scoring
+├── error.rs            # Typed error handling & unsupported-format guards
 ├── decoder/            # Pure-Rust audio decoders (Symphonia + rusty-opus + Sun AU)
 ├── meters/             # LUFS (BS.1770-4), 4x True Peak, Time Domain, Stereo, Waveform
 ├── spectral/           # FFT engine, 31-band ISO spectrum, MIR (BPM/Key), Transcode detector
 └── report/             # Terminal tables, TermiChart graphs, Plotters PNG/SVG, JSON/CSV export
-tests/                  # Unit & integration test suites
+tests/                  # 7 unit & integration test suites (18 tests)
 ```
+
+</details>
 
 ---
 

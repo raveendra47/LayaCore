@@ -1,0 +1,184 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 628" width="900" height="628" role="img" aria-label="LayaCore Software Architecture and Module Map">
+  <defs>
+    <linearGradient id="entryGradD" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2a161b"/>
+      <stop offset="100%" stop-color="#1b1418"/>
+    </linearGradient>
+    <linearGradient id="coreGradD" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#172434"/>
+      <stop offset="100%" stop-color="#141a23"/>
+    </linearGradient>
+    <marker id="arrD" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8.5 5 L 0 8.5 z" fill="#8b949e"/>
+    </marker>
+    <marker id="arrRedD" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8.5 5 L 0 8.5 z" fill="#f85149"/>
+    </marker>
+    <marker id="arrBlueD" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8.5 5 L 0 8.5 z" fill="#58a6ff"/>
+    </marker>
+    <style>
+      .f { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+      .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; }
+      .h1 { font-size: 13px; font-weight: 700; fill: #f0f6fc; }
+      .h2 { font-size: 11.5px; font-weight: 700; fill: #e6edf3; }
+      .sub { font-size: 10.5px; font-weight: 400; fill: #8b949e; }
+      .mod { font-size: 10.5px; font-weight: 600; fill: #79c0ff; }
+      .mod-red { font-size: 10.5px; font-weight: 600; fill: #ff7b72; }
+      .mod-amber { font-size: 10.5px; font-weight: 600; fill: #e3b341; }
+      .mod-green { font-size: 10.5px; font-weight: 600; fill: #56d364; }
+      .mod-purple { font-size: 10.5px; font-weight: 600; fill: #d2a8ff; }
+      .layer { font-size: 10px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; fill: #c9d1d9; }
+      .bullet { font-size: 10.5px; fill: #c9d1d9; }
+    </style>
+  </defs>
+
+  <!-- ==================== LAYER 1: ENTRY & BUILD ==================== -->
+  <rect x="24" y="14" width="256" height="78" rx="10" fill="#161b22" stroke="#6e7681" stroke-width="1.3" stroke-dasharray="4 3"/>
+  <text x="40" y="34" class="mono mod-amber">build.rs</text>
+  <text x="40" y="52" class="f h2">Windows Icon Compiler</text>
+  <text x="40" y="69" class="f sub">Pure-Rust .ico → .res linker</text>
+  <text x="40" y="83" class="f sub">Embeds layacore.ico into .exe</text>
+
+  <!-- Compile-time arrow build.rs -> main.rs -->
+  <line x1="280" y1="53" x2="306" y2="53" stroke="#e3b341" stroke-width="1.4" stroke-dasharray="3 2" marker-end="url(#arrD)"/>
+
+  <rect x="312" y="14" width="276" height="78" rx="10" fill="url(#entryGradD)" stroke="#f85149" stroke-width="1.6"/>
+  <text x="450" y="34" text-anchor="middle" class="mono mod-red">src/main.rs  →  layacore_cli.exe</text>
+  <text x="450" y="53" text-anchor="middle" class="f h1">CLI Entry &amp; Command Router</text>
+  <text x="450" y="70" text-anchor="middle" class="f sub">clap Flags • Progress Bars • Auto Dir Detection</text>
+  <text x="450" y="84" text-anchor="middle" class="f sub">Single Track • Batch Scan • JSON / CSV / Plot</text>
+
+  <!-- Bidirectional arrow main.rs <-> menu.rs -->
+  <line x1="588" y1="53" x2="614" y2="53" stroke="#f85149" stroke-width="1.4" marker-end="url(#arrRedD)"/>
+
+  <rect x="620" y="14" width="256" height="78" rx="10" fill="#161b22" stroke="#f85149" stroke-width="1.3"/>
+  <text x="636" y="34" class="mono mod-red">src/menu.rs</text>
+  <text x="636" y="52" class="f h2">Interactive TUI Launcher</text>
+  <text x="636" y="69" class="f sub">Arrow-key Menu [1–6] &amp; ANSI Banner</text>
+  <text x="636" y="83" class="f sub">Windows Drag-and-Drop Path Guard</text>
+
+  <!-- Arrows Layer 1 -> Layer 2 -->
+  <path d="M 410 92 L 410 120" fill="none" stroke="#f85149" stroke-width="1.5" marker-end="url(#arrRedD)"/>
+  <path d="M 490 92 C 490 108, 608 102, 608 120" fill="none" stroke="#8b949e" stroke-width="1.4" marker-end="url(#arrD)"/>
+  <path d="M 748 92 C 748 108, 632 102, 632 120" fill="none" stroke="#8b949e" stroke-width="1.4" marker-end="url(#arrD)"/>
+
+  <!-- ==================== LAYER 2: ORCHESTRATION & PUBLIC API ==================== -->
+  <rect x="24" y="124" width="446" height="76" rx="10" fill="url(#coreGradD)" stroke="#388bfd" stroke-width="1.6"/>
+  <text x="247" y="144" text-anchor="middle" class="mono mod">src/lib.rs  (Public Library Crate: layacore)</text>
+  <text x="247" y="163" text-anchor="middle" class="f h1">Single-Pass Streaming Analysis Pipeline</text>
+  <text x="247" y="180" text-anchor="middle" class="f sub">analyze_file() feeds decoded f32 PCM chunks concurrently to all</text>
+  <text x="247" y="193" text-anchor="middle" class="f sub">meters, FFT/MIR engines, transcode detector &amp; advisor in one pass</text>
+
+  <rect x="488" y="124" width="248" height="76" rx="10" fill="#161b22" stroke="#388bfd" stroke-width="1.4"/>
+  <text x="612" y="144" text-anchor="middle" class="mono mod">src/batch.rs</text>
+  <text x="612" y="163" text-anchor="middle" class="f h2">Parallel Batch / Album Scanner</text>
+  <text x="612" y="180" text-anchor="middle" class="f sub">Multi-core Worker Pool • Recursive Discovery</text>
+  <text x="612" y="193" text-anchor="middle" class="f sub">Album LUFS Spread, Outliers &amp; FLAC Audit</text>
+
+  <!-- batch.rs invokes lib.rs -->
+  <line x1="488" y1="162" x2="474" y2="162" stroke="#58a6ff" stroke-width="1.5" marker-end="url(#arrBlueD)"/>
+
+  <rect x="752" y="124" width="124" height="76" rx="10" fill="#161b22" stroke="#6e7681" stroke-width="1.3"/>
+  <text x="814" y="146" text-anchor="middle" class="mono mod-purple">src/error.rs</text>
+  <text x="814" y="165" text-anchor="middle" class="f h2">Typed Errors</text>
+  <text x="814" y="181" text-anchor="middle" class="f sub">AnalyzerError</text>
+  <text x="814" y="193" text-anchor="middle" class="f sub">Format Guards</text>
+
+  <!-- Arrow Layer 2 -> Layer 3 -->
+  <line x1="247" y1="200" x2="247" y2="228" stroke="#58a6ff" stroke-width="1.6" marker-end="url(#arrBlueD)"/>
+
+  <!-- ==================== LAYER 3: DECODING LAYER ==================== -->
+  <rect x="24" y="232" width="852" height="94" rx="12" fill="#161b22" fill-opacity="0.82" stroke="#30363d" stroke-width="1.3" stroke-dasharray="5 4"/>
+  <text x="42" y="250" class="f layer">Decoding Layer  —  src/decoder/  (Pure Rust • Zero C/FFI • Interleaved f32 PCM)</text>
+
+  <rect x="38" y="260" width="194" height="54" rx="8" fill="#1c2128" stroke="#388bfd" stroke-width="1.3"/>
+  <text x="135" y="278" text-anchor="middle" class="mono mod">decoder/mod.rs</text>
+  <text x="135" y="294" text-anchor="middle" class="f sub">AudioDecoder Trait &amp; Router</text>
+  <text x="135" y="307" text-anchor="middle" class="f sub">Unsupported Format Diagnostics</text>
+
+  <rect x="248" y="260" width="194" height="54" rx="8" fill="#1c2128" stroke="#388bfd" stroke-width="1.3"/>
+  <text x="345" y="278" text-anchor="middle" class="mono mod">decoder/symphonia.rs</text>
+  <text x="345" y="294" text-anchor="middle" class="f sub">FLAC, WAV, MP3, AAC, ALAC</text>
+  <text x="345" y="307" text-anchor="middle" class="f sub">OGG Vorbis, AIFF, CAF Demuxer</text>
+
+  <rect x="458" y="260" width="194" height="54" rx="8" fill="#1c2128" stroke="#f85149" stroke-width="1.4"/>
+  <text x="555" y="278" text-anchor="middle" class="mono mod-red">decoder/opus.rs</text>
+  <text x="555" y="294" text-anchor="middle" class="f sub">rusty-opus (RFC 6716 / 7845)</text>
+  <text x="555" y="307" text-anchor="middle" class="f sub">Mono/Stereo, pre_skip, Q7.8 Gain</text>
+
+  <rect x="668" y="260" width="194" height="54" rx="8" fill="#1c2128" stroke="#388bfd" stroke-width="1.3"/>
+  <text x="765" y="278" text-anchor="middle" class="mono mod">decoder/au.rs</text>
+  <text x="765" y="294" text-anchor="middle" class="f sub">Custom Sun AU / SND Parser</text>
+  <text x="765" y="307" text-anchor="middle" class="f sub">Linear PCM &amp; 8-bit μ-law</text>
+
+  <!-- Fan-out Arrows Layer 3 -> Layer 4 -->
+  <path d="M 160 326 L 160 352" fill="none" stroke="#8b949e" stroke-width="1.5" marker-end="url(#arrD)"/>
+  <path d="M 450 326 L 450 352" fill="none" stroke="#8b949e" stroke-width="1.5" marker-end="url(#arrD)"/>
+  <path d="M 740 326 L 740 352" fill="none" stroke="#8b949e" stroke-width="1.5" marker-end="url(#arrD)"/>
+
+  <!-- ==================== LAYER 4: DSP, FORENSICS & ADVISOR ==================== -->
+  <!-- Card 1: Broadcast & Dynamics Meters -->
+  <rect x="24" y="356" width="272" height="138" rx="12" fill="#1c2128" stroke="#388bfd" stroke-width="1.4"/>
+  <text x="40" y="376" class="f layer" fill="#79c0ff">Broadcast &amp; Dynamics — src/meters/</text>
+  <line x1="38" y1="384" x2="282" y2="384" stroke="#30363d" stroke-width="1"/>
+  <text x="40" y="402" class="mono mod">lufs.rs</text>
+  <text x="128" y="402" class="f sub">BS.1770-4 / EBU R128, LRA</text>
+  <text x="40" y="421" class="mono mod">true_peak.rs</text>
+  <text x="128" y="421" class="f sub">4× Polyphase FIR (dBTP)</text>
+  <text x="40" y="440" class="mono mod">time_domain.rs</text>
+  <text x="138" y="440" class="f sub">RMS, Peak, Clip, Silence</text>
+  <text x="40" y="459" class="mono mod">stereo.rs</text>
+  <text x="128" y="459" class="f sub">Phase, Width, Mid/Side</text>
+  <text x="40" y="478" class="mono mod">waveform.rs</text>
+  <text x="128" y="478" class="f sub">Envelope Downsampler</text>
+
+  <!-- Card 2: Spectral, MIR & Forensics -->
+  <rect x="314" y="356" width="272" height="138" rx="12" fill="#1c2128" stroke="#d29922" stroke-width="1.4"/>
+  <text x="330" y="376" class="f layer" fill="#e3b341">Spectral &amp; Forensics — src/spectral/</text>
+  <line x1="328" y1="384" x2="572" y2="384" stroke="#30363d" stroke-width="1"/>
+  <text x="330" y="404" class="mono mod-amber">fft.rs</text>
+  <text x="424" y="404" class="f sub">Hann Window &amp; realfft Engine</text>
+  <text x="330" y="426" class="mono mod-amber">features.rs</text>
+  <text x="424" y="426" class="f sub">31-Band ISO, Centroid, Rolloff</text>
+  <text x="330" y="448" class="mono mod-amber">rhythm.rs</text>
+  <text x="424" y="448" class="f sub">BPM Onset &amp; 12-Tone Key</text>
+  <text x="330" y="470" class="mono mod-amber">transcode.rs</text>
+  <text x="424" y="470" class="f sub">Fake Lossless Cutoff Audit</text>
+
+  <!-- Card 3: Advisor & Test Verification -->
+  <rect x="604" y="356" width="272" height="138" rx="12" fill="#1c2128" stroke="#a371f7" stroke-width="1.4"/>
+  <text x="620" y="376" class="f layer" fill="#d2a8ff">Intelligence &amp; QA Verification</text>
+  <line x1="618" y1="384" x2="862" y2="384" stroke="#30363d" stroke-width="1"/>
+  <text x="620" y="404" class="mono mod-purple">src/advisor.rs</text>
+  <text x="620" y="420" class="f sub">0–100 Readiness Score, Grades &amp; Fixes</text>
+  <text x="620" y="434" class="f sub">(Headroom, LUFS, Phase, EQ, Authenticity)</text>
+  <line x1="618" y1="445" x2="862" y2="445" stroke="#30363d" stroke-width="1" stroke-dasharray="3 3"/>
+  <text x="620" y="463" class="mono mod-green">tests/*.rs  (7 Suites • 18 Tests)</text>
+  <text x="620" y="479" class="f sub">Opus, LUFS, Spectral, Batch, Advisor, Charts</text>
+
+  <!-- Merge Arrows Layer 4 -> Layer 5 -->
+  <path d="M 160 494 L 160 520" fill="none" stroke="#8b949e" stroke-width="1.5" marker-end="url(#arrD)"/>
+  <path d="M 450 494 L 450 520" fill="none" stroke="#8b949e" stroke-width="1.5" marker-end="url(#arrD)"/>
+  <path d="M 740 494 L 740 520" fill="none" stroke="#8b949e" stroke-width="1.5" marker-end="url(#arrD)"/>
+
+  <!-- ==================== LAYER 5: REPORT & EXPORT LAYER ==================== -->
+  <rect x="24" y="524" width="852" height="90" rx="12" fill="#161b22" fill-opacity="0.82" stroke="#3fb950" stroke-width="1.4"/>
+  <text x="42" y="542" class="f layer" fill="#56d364">Presentation &amp; Export Layer  —  src/report/</text>
+
+  <rect x="38" y="552" width="194" height="50" rx="8" fill="#1c2128" stroke="#3fb950" stroke-width="1.2"/>
+  <text x="135" y="570" text-anchor="middle" class="mono mod-green">report/terminal.rs</text>
+  <text x="135" y="588" text-anchor="middle" class="f sub">Colored comfy-table Reports</text>
+
+  <rect x="248" y="552" width="194" height="50" rx="8" fill="#1c2128" stroke="#3fb950" stroke-width="1.2"/>
+  <text x="345" y="570" text-anchor="middle" class="mono mod-green">report/term_charts.rs</text>
+  <text x="345" y="588" text-anchor="middle" class="f sub">TermiChart FFT, Chroma, Wave</text>
+
+  <rect x="458" y="552" width="194" height="50" rx="8" fill="#1c2128" stroke="#3fb950" stroke-width="1.2"/>
+  <text x="555" y="570" text-anchor="middle" class="mono mod-green">report/charts.rs</text>
+  <text x="555" y="588" text-anchor="middle" class="f sub">Plotters PNG / SVG Dashboard</text>
+
+  <rect x="668" y="552" width="194" height="50" rx="8" fill="#1c2128" stroke="#3fb950" stroke-width="1.2"/>
+  <text x="765" y="570" text-anchor="middle" class="mono mod-green">report/json.rs</text>
+  <text x="765" y="588" text-anchor="middle" class="f sub">Structured JSON &amp; Album CSV</text>
+</svg>
