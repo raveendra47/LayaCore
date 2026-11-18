@@ -8,14 +8,17 @@
       <stop offset="0%" stop-color="#172434"/>
       <stop offset="100%" stop-color="#141a23"/>
     </linearGradient>
-    <marker id="arrD" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 1.5 L 8.5 5 L 0 8.5 z" fill="#8b949e"/>
+    <marker id="arrD" markerUnits="userSpaceOnUse" viewBox="0 0 9 9" refX="2.5" refY="4.5" markerWidth="9" markerHeight="9" orient="auto">
+      <path d="M 0 1 L 9 4.5 L 0 8 L 1.5 4.5 z" fill="#8b949e"/>
     </marker>
-    <marker id="arrRedD" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 1.5 L 8.5 5 L 0 8.5 z" fill="#f85149"/>
+    <marker id="arrRedD" markerUnits="userSpaceOnUse" viewBox="0 0 9 9" refX="2.5" refY="4.5" markerWidth="9" markerHeight="9" orient="auto">
+      <path d="M 0 1 L 9 4.5 L 0 8 L 1.5 4.5 z" fill="#f85149"/>
     </marker>
-    <marker id="arrBlueD" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 1.5 L 8.5 5 L 0 8.5 z" fill="#58a6ff"/>
+    <marker id="arrBlueD" markerUnits="userSpaceOnUse" viewBox="0 0 9 9" refX="2.5" refY="4.5" markerWidth="9" markerHeight="9" orient="auto">
+      <path d="M 0 1 L 9 4.5 L 0 8 L 1.5 4.5 z" fill="#58a6ff"/>
+    </marker>
+    <marker id="arrAmberD" markerUnits="userSpaceOnUse" viewBox="0 0 9 9" refX="2.5" refY="4.5" markerWidth="9" markerHeight="9" orient="auto">
+      <path d="M 0 1 L 9 4.5 L 0 8 L 1.5 4.5 z" fill="#e3b341"/>
     </marker>
     <style>
       .f { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
@@ -29,19 +32,18 @@
       .mod-green { font-size: 10.5px; font-weight: 600; fill: #56d364; }
       .mod-purple { font-size: 10.5px; font-weight: 600; fill: #d2a8ff; }
       .layer { font-size: 10px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; fill: #c9d1d9; }
-      .bullet { font-size: 10.5px; fill: #c9d1d9; }
     </style>
   </defs>
 
-  <!-- ==================== LAYER 1: ENTRY & BUILD ==================== -->
+  <!-- ==================== LAYER 1: ENTRY & BUILD (y=14..92) ==================== -->
   <rect x="24" y="14" width="256" height="78" rx="10" fill="#161b22" stroke="#6e7681" stroke-width="1.3" stroke-dasharray="4 3"/>
   <text x="40" y="34" class="mono mod-amber">build.rs</text>
   <text x="40" y="52" class="f h2">Windows Icon Compiler</text>
   <text x="40" y="69" class="f sub">Pure-Rust .ico → .res linker</text>
   <text x="40" y="83" class="f sub">Embeds layacore.ico into .exe</text>
 
-  <!-- Compile-time arrow build.rs -> main.rs -->
-  <line x1="280" y1="53" x2="306" y2="53" stroke="#e3b341" stroke-width="1.4" stroke-dasharray="3 2" marker-end="url(#arrD)"/>
+  <!-- Compile-time arrow build.rs (x=280) -> main.rs (x=312 -> line ends x=305) -->
+  <line x1="280" y1="53" x2="305" y2="53" stroke="#e3b341" stroke-width="1.5" stroke-dasharray="3 2" marker-end="url(#arrAmberD)"/>
 
   <rect x="312" y="14" width="276" height="78" rx="10" fill="url(#entryGradD)" stroke="#f85149" stroke-width="1.6"/>
   <text x="450" y="34" text-anchor="middle" class="mono mod-red">src/main.rs  →  layacore_cli.exe</text>
@@ -49,8 +51,8 @@
   <text x="450" y="70" text-anchor="middle" class="f sub">clap Flags • Progress Bars • Auto Dir Detection</text>
   <text x="450" y="84" text-anchor="middle" class="f sub">Single Track • Batch Scan • JSON / CSV / Plot</text>
 
-  <!-- Bidirectional arrow main.rs <-> menu.rs -->
-  <line x1="588" y1="53" x2="614" y2="53" stroke="#f85149" stroke-width="1.4" marker-end="url(#arrRedD)"/>
+  <!-- Arrow main.rs (x=588) -> menu.rs (x=620 -> line ends x=613) -->
+  <line x1="588" y1="53" x2="613" y2="53" stroke="#f85149" stroke-width="1.5" marker-end="url(#arrRedD)"/>
 
   <rect x="620" y="14" width="256" height="78" rx="10" fill="#161b22" stroke="#f85149" stroke-width="1.3"/>
   <text x="636" y="34" class="mono mod-red">src/menu.rs</text>
@@ -58,12 +60,13 @@
   <text x="636" y="69" class="f sub">Arrow-key Menu [1–6] &amp; ANSI Banner</text>
   <text x="636" y="83" class="f sub">Windows Drag-and-Drop Path Guard</text>
 
-  <!-- Arrows Layer 1 -> Layer 2 -->
-  <path d="M 410 92 L 410 120" fill="none" stroke="#f85149" stroke-width="1.5" marker-end="url(#arrRedD)"/>
-  <path d="M 490 92 C 490 108, 608 102, 608 120" fill="none" stroke="#8b949e" stroke-width="1.4" marker-end="url(#arrD)"/>
-  <path d="M 748 92 C 748 108, 632 102, 632 120" fill="none" stroke="#8b949e" stroke-width="1.4" marker-end="url(#arrD)"/>
+  <!-- Arrows Layer 1 (y=92) -> Layer 2 (top edge y=124 -> line ends y=117) -->
+  <line x1="410" y1="92" x2="410" y2="117" stroke="#f85149" stroke-width="1.6" marker-end="url(#arrRedD)"/>
+  <path d="M 510 92 L 510 102 Q 510 107 515 107 L 612 107" fill="none" stroke="#8b949e" stroke-width="1.5"/>
+  <path d="M 748 92 L 748 102 Q 748 107 743 107 L 612 107" fill="none" stroke="#8b949e" stroke-width="1.5"/>
+  <line x1="612" y1="107" x2="612" y2="117" stroke="#8b949e" stroke-width="1.5" marker-end="url(#arrD)"/>
 
-  <!-- ==================== LAYER 2: ORCHESTRATION & PUBLIC API ==================== -->
+  <!-- ==================== LAYER 2: ORCHESTRATION & PUBLIC API (y=124..200) ==================== -->
   <rect x="24" y="124" width="446" height="76" rx="10" fill="url(#coreGradD)" stroke="#388bfd" stroke-width="1.6"/>
   <text x="247" y="144" text-anchor="middle" class="mono mod">src/lib.rs  (Public Library Crate: layacore)</text>
   <text x="247" y="163" text-anchor="middle" class="f h1">Single-Pass Streaming Analysis Pipeline</text>
@@ -76,8 +79,11 @@
   <text x="612" y="180" text-anchor="middle" class="f sub">Multi-core Worker Pool • Recursive Discovery</text>
   <text x="612" y="193" text-anchor="middle" class="f sub">Album LUFS Spread, Outliers &amp; FLAC Audit</text>
 
-  <!-- batch.rs invokes lib.rs -->
-  <line x1="488" y1="162" x2="474" y2="162" stroke="#58a6ff" stroke-width="1.5" marker-end="url(#arrBlueD)"/>
+  <!-- batch.rs (x=488) -> lib.rs (x=470 -> line ends x=477) -->
+  <line x1="488" y1="162" x2="477" y2="162" stroke="#58a6ff" stroke-width="1.5" marker-end="url(#arrBlueD)"/>
+
+  <!-- Shared error link batch.rs (x=736) to error.rs (x=752) -->
+  <line x1="736" y1="162" x2="752" y2="162" stroke="#6e7681" stroke-width="1.4" stroke-dasharray="3 2"/>
 
   <rect x="752" y="124" width="124" height="76" rx="10" fill="#161b22" stroke="#6e7681" stroke-width="1.3"/>
   <text x="814" y="146" text-anchor="middle" class="mono mod-purple">src/error.rs</text>
@@ -85,10 +91,10 @@
   <text x="814" y="181" text-anchor="middle" class="f sub">AnalyzerError</text>
   <text x="814" y="193" text-anchor="middle" class="f sub">Format Guards</text>
 
-  <!-- Arrow Layer 2 -> Layer 3 -->
-  <line x1="247" y1="200" x2="247" y2="228" stroke="#58a6ff" stroke-width="1.6" marker-end="url(#arrBlueD)"/>
+  <!-- Arrow Layer 2 (y=200) -> Layer 3 (top edge y=232 -> line ends y=225) -->
+  <line x1="247" y1="200" x2="247" y2="225" stroke="#58a6ff" stroke-width="1.6" marker-end="url(#arrBlueD)"/>
 
-  <!-- ==================== LAYER 3: DECODING LAYER ==================== -->
+  <!-- ==================== LAYER 3: DECODING LAYER (y=232..326) ==================== -->
   <rect x="24" y="232" width="852" height="94" rx="12" fill="#161b22" fill-opacity="0.82" stroke="#30363d" stroke-width="1.3" stroke-dasharray="5 4"/>
   <text x="42" y="250" class="f layer">Decoding Layer  —  src/decoder/  (Pure Rust • Zero C/FFI • Interleaved f32 PCM)</text>
 
@@ -112,12 +118,12 @@
   <text x="765" y="294" text-anchor="middle" class="f sub">Custom Sun AU / SND Parser</text>
   <text x="765" y="307" text-anchor="middle" class="f sub">Linear PCM &amp; 8-bit μ-law</text>
 
-  <!-- Fan-out Arrows Layer 3 -> Layer 4 -->
-  <path d="M 160 326 L 160 352" fill="none" stroke="#8b949e" stroke-width="1.5" marker-end="url(#arrD)"/>
-  <path d="M 450 326 L 450 352" fill="none" stroke="#8b949e" stroke-width="1.5" marker-end="url(#arrD)"/>
-  <path d="M 740 326 L 740 352" fill="none" stroke="#8b949e" stroke-width="1.5" marker-end="url(#arrD)"/>
+  <!-- Orthogonal 3-Way Distribution Bus Layer 3 (y=326) -> Layer 4 (top edge y=356 -> line ends y=349) -->
+  <line x1="450" y1="326" x2="450" y2="349" stroke="#8b949e" stroke-width="1.6" marker-end="url(#arrD)"/>
+  <path d="M 450 338 L 166 338 Q 160 338 160 344 L 160 349" fill="none" stroke="#8b949e" stroke-width="1.6" marker-end="url(#arrD)"/>
+  <path d="M 450 338 L 734 338 Q 740 338 740 344 L 740 349" fill="none" stroke="#8b949e" stroke-width="1.6" marker-end="url(#arrD)"/>
 
-  <!-- ==================== LAYER 4: DSP, FORENSICS & ADVISOR ==================== -->
+  <!-- ==================== LAYER 4: DSP, FORENSICS & ADVISOR (y=356..494) ==================== -->
   <!-- Card 1: Broadcast & Dynamics Meters -->
   <rect x="24" y="356" width="272" height="138" rx="12" fill="#1c2128" stroke="#388bfd" stroke-width="1.4"/>
   <text x="40" y="376" class="f layer" fill="#79c0ff">Broadcast &amp; Dynamics — src/meters/</text>
@@ -157,12 +163,12 @@
   <text x="620" y="463" class="mono mod-green">tests/*.rs  (7 Suites • 18 Tests)</text>
   <text x="620" y="479" class="f sub">Opus, LUFS, Spectral, Batch, Advisor, Charts</text>
 
-  <!-- Merge Arrows Layer 4 -> Layer 5 -->
-  <path d="M 160 494 L 160 520" fill="none" stroke="#8b949e" stroke-width="1.5" marker-end="url(#arrD)"/>
-  <path d="M 450 494 L 450 520" fill="none" stroke="#8b949e" stroke-width="1.5" marker-end="url(#arrD)"/>
-  <path d="M 740 494 L 740 520" fill="none" stroke="#8b949e" stroke-width="1.5" marker-end="url(#arrD)"/>
+  <!-- Arrows Layer 4 (y=494) -> Layer 5 (top edge y=524 -> line ends y=517) -->
+  <line x1="160" y1="494" x2="160" y2="517" stroke="#8b949e" stroke-width="1.6" marker-end="url(#arrD)"/>
+  <line x1="450" y1="494" x2="450" y2="517" stroke="#8b949e" stroke-width="1.6" marker-end="url(#arrD)"/>
+  <line x1="740" y1="494" x2="740" y2="517" stroke="#8b949e" stroke-width="1.6" marker-end="url(#arrD)"/>
 
-  <!-- ==================== LAYER 5: REPORT & EXPORT LAYER ==================== -->
+  <!-- ==================== LAYER 5: REPORT & EXPORT LAYER (y=524..614) ==================== -->
   <rect x="24" y="524" width="852" height="90" rx="12" fill="#161b22" fill-opacity="0.82" stroke="#3fb950" stroke-width="1.4"/>
   <text x="42" y="542" class="f layer" fill="#56d364">Presentation &amp; Export Layer  —  src/report/</text>
 
