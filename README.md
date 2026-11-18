@@ -1,10 +1,11 @@
 # LayaCore
 
 [![CI](https://github.com/PhamBoy47/LayaCore/actions/workflows/ci.yml/badge.svg)](https://github.com/PhamBoy47/LayaCore/actions/workflows/ci.yml)
+[![Platform: Windows](https://img.shields.io/badge/Platform-Windows-0078D6.svg)](#)
 [![License: MIT](https://img.shields.io/badge/License-MIT-red.svg)](LICENSE)
 [![Pure Rust](https://img.shields.io/badge/Pure%20Rust-0%20C%2FFFI%20Deps-orange.svg)](#)
 
-**LayaCore** is a fast, offline, **pure-Rust** audio mastering, dynamics, spectral analysis, fake lossless transcode verification, and batch album scanning suite — with **zero external C/FFI dependencies** (no FFmpeg required).
+**LayaCore** is a fast, offline, **pure-Rust** audio mastering, dynamics, spectral analysis, fake lossless transcode verification, and batch album scanning suite for **Windows** — with **zero external C/FFI dependencies** (no FFmpeg required).
 
 ---
 
