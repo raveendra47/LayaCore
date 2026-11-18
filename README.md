@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/PhamBoy47/LayaCore/releases"><img src="https://img.shields.io/github/v/release/PhamBoy47/LayaCore?label=Release&color=0078D6" alt="Release" /></a>
+  <a href="https://github.com/raveendra47/LayaCore/releases"><img src="https://img.shields.io/github/v/release/raveendra47/LayaCore?label=Release&color=0078D6" alt="Release" /></a>
   <img src="https://img.shields.io/badge/Platform-Windows-0078D6?logo=windows&logoColor=white" alt="Platform: Windows" />
   <img src="https://img.shields.io/badge/Pure%20Rust-0%20C%2FFFI%20Deps-orange?logo=rust&logoColor=white" alt="Pure Rust" />
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-red.svg" alt="License: MIT" /></a>
