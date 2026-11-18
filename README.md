@@ -52,7 +52,7 @@
 
 ## 🔄 Signal Pipeline
 
-LayaCore processes audio in a **single streaming pass**, feeding decoded PCM frames simultaneously into broadcast meters, spectral engines, and forensic detectors *(click diagram to open interactive zoom)*:
+LayaCore processes audio in a **single streaming pass**, feeding decoded PCM frames simultaneously into broadcast meters, spectral engines, and forensic detectors:
 
 <p align="center">
   <picture>
